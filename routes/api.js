@@ -1,25 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const Driver = require('../models/driver');
 
-router.get('/student', function(req, res) {
+router.get('/driver', function(req, res, next) {
   res.send({type: 'GET'})
 });
 
-router.post('/student', function(req, res) {
-  console.log(req.body);
-  res.send({
-    type: 'POST',
-    name: req.body.name,
-    city: req.body.city
-
-  });
+// Posts to database
+router.post('/driver', function(req, res, next) {
+  Driver.create(req.body).then(function(driver) {
+    res.send(driver);
+  }).catch(next);
 })
 
-router.put('/student/:id', function(req, res) {
+router.put('/driver/:id', function(req, res, next) {
   res.send({type: 'PUT'})
 })
 
-router.delete('/student/:id', function (req, res) {
+router.delete('/driver/:id', function (req, res, next) {
   res.send({type: 'DELETE'});
 })
 
