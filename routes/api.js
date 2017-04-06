@@ -13,12 +13,20 @@ router.post('/driver', function(req, res, next) {
   }).catch(next);
 })
 
+// Updates Driver in the database
 router.put('/driver/:id', function(req, res, next) {
-  res.send({type: 'PUT'})
+  Driver.findByIdAndUpdate({_id: req.params.id}, req.body).then(function() {
+    Driver.findOne({_id: req.params.id}).then(function(driver) {
+      res.send(driver)
+    })
+  })
 })
 
-router.delete('/driver/:id', function (req, res, next) {
-  res.send({type: 'DELETE'});
+router.delete('/driver/:id', function(req, res, next) {
+  Driver.findByIdAndRemove({_id: req.params.id})
+  .then(function(driver) {
+      res.send(driver)
+    })
 })
 
 module.exports = router;
