@@ -6,7 +6,13 @@ router.get('/student', function(req, res) {
 });
 
 router.post('/student', function(req, res) {
-  res.send({type: 'POST'});
+  console.log(req.body);
+  res.send({
+    type: 'POST',
+    name: req.body.name,
+    city: req.body.city
+
+  });
 })
 
 router.put('/student/:id', function(req, res) {
