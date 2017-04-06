@@ -3,7 +3,12 @@ const router = express.Router();
 const Driver = require('../models/driver');
 
 router.get('/driver', function(req, res, next) {
-  res.send({type: 'GET'})
+  Driver.geoNear(
+    {type: 'Point', coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]},
+    {maxDistance: 10000000, spherical: true}
+  ).then(function(driver) {
+    res.send(driver)
+  }).catch(next);
 });
 
 // Posts to database
