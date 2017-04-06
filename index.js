@@ -13,6 +13,9 @@ mongoose.connect('mongodb://localhost/driver');
 // ES6 Promise
 mongoose.Promise = global.Promise;
 
+// Static Files
+app.use(express.static('public'));
+
 // Body Parser middleware
 app.use(bodyParser.json());
 

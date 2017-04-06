@@ -5,7 +5,7 @@ const Driver = require('../models/driver');
 router.get('/driver', function(req, res, next) {
   Driver.geoNear(
     {type: 'Point', coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]},
-    {maxDistance: 10000000, spherical: true}
+    {maxDistance: 100000000, spherical: true}
   ).then(function(driver) {
     res.send(driver)
   }).catch(next);
